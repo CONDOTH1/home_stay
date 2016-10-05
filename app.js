@@ -7,6 +7,10 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var Sequelize = require('sequelize'), sequelize = new Sequelize('home_stay_development', null, null, {
+  dialect: "postgres",
+  port: 5432,
+});
 
 var app = express();
 
