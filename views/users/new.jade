@@ -1,0 +1,23 @@
+extends ./../layout
+
+block content
+  h1= title
+  p #{title}
+
+  form(name="input", action="/users", method="post")
+    | First Name:
+    input(type="text", name="first")
+
+    | Second Name:
+    input(type="text", name="second")
+
+    | Email:
+    input(type="text", name="email")
+
+    | Username:
+    input(type="text", name="user")
+
+    | Password:
+    input(type="text", name="password")
+
+    input(type="submit", value="Submit")
