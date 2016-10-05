@@ -1,10 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var models = require('../models/users');
-
+var users = models();
 /* GET users listing. */
 router.get('/new', function(req, res, next) {
-  console.log();
+  console.log(users);
   res.render('users/new', {
     title: 'Sign Up'
   });
@@ -12,7 +12,7 @@ router.get('/new', function(req, res, next) {
 
 
 router.post('/', function(req, res) {
-  var newUser = models.User.build({
+  var newUser = users.build({
     first_name: req.body.first,
     second_name: req.body.second,
     email: req.body.email,
