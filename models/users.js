@@ -1,3 +1,4 @@
+var validator = require('validator');
 
 var Sequelize = require('sequelize');
 
@@ -17,7 +18,7 @@ sequelize
 module.exports = function(){
 
 var User = sequelize.define('user', {
-  first_name: Sequelize.STRING,
+  first_name: {type: Sequelize.STRING, allowNull: false, validate: {notEmpty: true}},
   second_name: Sequelize.STRING,
   email: Sequelize.STRING,
   username: Sequelize.STRING,

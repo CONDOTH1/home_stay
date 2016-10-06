@@ -21,6 +21,7 @@ router.post('/', function(req, res) {
   });
 
   newUser.save().then(function() {
+    res.redirect('/users/welcome');
     console.log('saved');
   });
 });
