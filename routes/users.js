@@ -11,19 +11,49 @@ router.get('/new', function(req, res, next) {
 });
 
 
-router.post('/', function(req, res) {
-  var newUser = users.build({
-    first_name: req.body.first,
-    second_name: req.body.second,
-    email: req.body.email,
-    username: req.body.user,
-    password: req.body.user
-  });
+router.post('/new', function(req, res) {
 
-  newUser.save().then(function() {
-    res.redirect('/users/welcome');
-    console.log('saved');
-  });
+  req.checkBody('first', 'First name is required').notEmpty();
+  req.checkBody('second', 'Second name is required').notEmpty();
+  req.checkBody('email', 'Email name is required').notEmpty();
+  req.checkBody('email', 'Valid email is required').isEmail();
+  req.checkBody('user', 'Username is required').notEmpty();
+  req.checkBody('password', 'Password is required').notEmpty();
+
+
+
+  var errors = req.validationErrors();
+
+  if (errors){
+    console.log('There are errors');
+    console.log(errors.length);
+    // req.flash('error_msg', errors);
+    // res.redirect('new');
+    res.render('users/new', {title: 'Sign Up', errors: errors});
+  } else {
+    var newUser = users.build({
+      first_name: req.body.first,
+      second_name: req.body.second,
+      email: req.body.email,
+      username: req.body.user,
+      password: req.body.user
+    });
+    newUser.save().then(function() {
+      res.redirect('welcome');
+      console.log('saved');
+    });
+  }
+
+
+  // var newUser = users.build({
+  //   first_name: req.body.first,
+  //   second_name: req.body.second,
+  //   email: req.body.email,
+  //   username: req.body.user,
+  //   password: req.body.user
+  // });
+
+
 });
 
 router.get('/welcome', function(req, res, next) {

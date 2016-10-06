@@ -18,7 +18,8 @@ sequelize
 module.exports = function(){
 
 var User = sequelize.define('user', {
-  first_name: {type: Sequelize.STRING, allowNull: false, validate: {notEmpty: true}},
+
+  first_name: {type: Sequelize.STRING, validate: {notEmpty: {msg: 'First name required'}}},
   second_name: Sequelize.STRING,
   email: Sequelize.STRING,
   username: Sequelize.STRING,

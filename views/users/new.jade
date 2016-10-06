@@ -3,10 +3,17 @@ extends ./../layout
 block content
   h1= title
   p #{title}
+  if errors
+    ul
+    - for (var i = 0; i < errors.length; i++) {
+        li #{errors[i].msg}
+    - }
+    ul
 
-  form(name="input", action="/users", method="post")
+
+  form(name="input", action="new", method="post")
     | First Name:
-    input(type="text", name="first")
+    input(type="text", name="first", id='first')
 
     | Second Name:
     input(type="text", name="second")
