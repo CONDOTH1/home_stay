@@ -19,6 +19,8 @@ router.post('/new', function(req, res) {
   req.checkBody('email', 'Valid email is required').isEmail();
   req.checkBody('user', 'Username is required').notEmpty();
   req.checkBody('password', 'Password is required').notEmpty();
+  req.assert('password', '6 to 20 characters required').len(6, 20);
+  req.assert('password_confirmation', 'Passwords must match').equals(req.body.password);
 
 
 
